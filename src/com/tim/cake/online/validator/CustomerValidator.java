@@ -53,7 +53,7 @@ public class CustomerValidator implements Validator
 		{
 			errors.rejectValue("mobile", "customer.mobile.invalid");
 		}
-		else if (isMobile(mobile))
+		else if (!isMobile(mobile))
 		{
 			errors.rejectValue("mobile", "customer.mobile.format.invalid");
 		}
@@ -62,7 +62,7 @@ public class CustomerValidator implements Validator
 		{
 			errors.rejectValue("email", "customer.email.invalid");
 		}
-		else if (isMobile(email))
+		else if (!isEmail(email))
 		{
 			errors.rejectValue("email", "customer.email.format.invalid");
 		}

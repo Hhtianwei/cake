@@ -22,12 +22,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<c:url var="register" value="/register"/>
 	
 	<form:form action="${register }" method="post" commandName="customerForm">
+	
+		<font color="red"><form:errors path="name"/></font><br>
 		用户名：<form:input path="name"/><br>
+		
+		<font color="red"><form:errors path="nickName"/></font><br>
 		昵    称：<form:input path="nickName"/><br>
+		
+		<font color="red"><form:errors path="mobile"/></font><br>
 		手机号：<form:input path="mobile"/><br>
+		
+		<font color="red"><form:errors path="email"/></font><br>
 		邮    箱：<form:input path="email"/><br>
+		
+		<font color="red"><form:errors path="password"/></font><br>
 		密    码：<form:password path="password"/><br>
-		密    码：<form:password path="confirmPassword"/><br>		
+		
+		<font color="red"><form:errors path="confirmPassword"/></font><br>
+		再次输入密码：<form:password path="confirmPassword"/><br>		
 		 <input type="submit" value="register"/><br>
 	</form:form>
 	
