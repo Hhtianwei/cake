@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns:b="http://www.springframework.org/schema/beans"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://www.springframework.org/schema/security"
+		 xmlns:p="http://www.springframework.org/schema/p"
+		 xmlns:util="http://www.springframework.org/schema/util"
+		 xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<http pattern="/ui/**" security="none"/>
+	<http pattern="/index.jsp" security="none"/>
+	<http pattern="/login.jsp" security="none"/>
+	<http pattern="/logout.jsp" security="none"/>
+	
+	<http auto-config="true">
+		
+		<intercept-url pattern="/" access="permitAll"/>
+		<intercept-url pattern="/login*" access="permitAll"/>
+		<intercept-url pattern="/register" access="permitAll"/>
+		
+		<intercept-url pattern="/testHello2" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/testHello3" access="hasRole('ROLE_ADMIN')"/>
+		
+		<!-- hasRole('ROLE_USER') 只能放一个属性    hasAnyRole()可以放多个值  -->
+		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+		
+		<form-login login-page="/login"  username-parameter="uname" password-parameter="password"
+		authentication-success-handler-ref="loginSuccessHandler"
+		authentication-failure-handler-ref="loginFailureHandler"/>
+
+		<!-- 定义 登出 的 url ，登出后，设置session为无效， 设置登出成功之后跳转的页面 。  登出之后 清除 cookie中的session -->
+		<logout logout-url="/logout" invalidate-session="true" logout-success-url="/" delete-cookies="JSESSIONID" />
+		
+		<!-- 两种save remember me 的方式，一种是用cookie 一种是通过持久化。 用cookie,只要配置一下 key, 自定义的一个key . cookie会在浏览器中生成一个 remember-me的value value是通过Base64加密的，其中就会有 key值 -->
+		<remember-me key="cAkE" services-ref="myRememberMeServices"/>
+	</http>
+	
+	<b:bean id="myRememberMeServices" class="com.tim.cake.online.security.service.MyRememberMeServices">
+		<b:constructor-arg name="key" value="cAkE"/>
+		<b:constructor-arg name="userDetailsService" ref="myUserDetailsService"/>
+		<b:property name="customerFacade" ref="customerFacade"/>
+	</b:bean>
+	 
+	 <!-- 加盐实现类  【    密码{盐值} 】 -->
+	 <b:bean id="mySaltSource" class="com.tim.cake.online.security.service.MySaltSourceImpl"/>
+	 
+	<authentication-manager>
+		<authentication-provider ref="myAuthenticationProvider"/>
+	</authentication-manager>
+	
+	<b:bean id="myAuthenticationProvider" class="com.tim.cake.online.security.provider.MyAuthenticationProvider">
+		<b:property name="userDetailsService" ref="myUserDetailsService"/>
+		<b:property name="saltSource" ref="mySaltSource"/>
+		<b:property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
+		<b:property name="hideUserNotFoundExceptions" value="false"/>
+		<b:property name="passwordEncoder" ref="myMD5PasswordEncoder"/>
+	</b:bean>
+	
+	<b:bean id="myMD5PasswordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+	
+	<!-- 登录错误用户计数-->
+    <b:bean id="bruteForceAttackCounter" class="com.tim.cake.online.security.service.DefaultBruteForceAttackCounter">
+    	<b:constructor-arg name="maxFailedLogins" value="10" />
+        <b:constructor-arg name="cacheExpiration" value="20" />
+        <b:constructor-arg name="cacheSizeLimit" value="1000" />
+    </b:bean>
+	
+	<b:bean id="myUserDetailsService" class="com.tim.cake.online.security.dao.UserLoginJdbcDaoImpl">
+		<b:property name="dataSource" ref="securityDataSource"/>
+	</b:bean>
+	
+	<b:bean id="loginSuccessHandler" class="com.tim.cake.online.security.handler.MyAuthenticationSuccessHandler">
+		<b:property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
+		<b:property name="customerFacade" ref="customerFacade"/>
+	</b:bean>
+	
+	<b:bean id="loginFailureHandler" class="com.tim.cake.online.security.handler.MyAuthenticationFailureHandler">
+		<b:property name="defaultFailureUrl" value="/login?error=true"/>
+		<b:property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
+	</b:bean>
+
+</b:beans>

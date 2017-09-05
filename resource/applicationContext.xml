@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<import resource="connectionDB.xml"/>
+	 
+	<context:component-scan base-package="com.tim.cake.online"/>
+	 
+	<bean id="customerDao" class="com.tim.cake.online.dao.impl.CustomerDaoImpl" parent="commonDAO">
+	</bean>
+    
+    <bean id="customerService" class="com.tim.cake.online.service.impl.CustomerServiceImpl">
+    	<property name="customerDao" ref="customerDao"></property>
+    	<property name="commonService" ref="commonService"></property>
+    </bean>
+    
+    <bean id="customerFacade" class="com.tim.cake.online.facade.impl.CustomerFacadeImpl">
+    	<property name="customerService" ref="customerService"/>
+    	<property name="customerConvert" ref="customerConvert"/>
+    	<property name="customerReverseConvert" ref="customerReverseConvert"/>
+    </bean>
+    
+    <bean id="customerConvert" class="com.tim.cake.online.convert.CustomerConvert"></bean>
+    
+    <bean id="customerReverseConvert" class="com.tim.cake.online.convert.CustomerReverseConvert"></bean>
+    
+    
+    
+</beans>
