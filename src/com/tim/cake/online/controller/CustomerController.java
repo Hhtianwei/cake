@@ -153,7 +153,7 @@ public class CustomerController
 	 * @return
 	 */
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
-	public String updateCustomerPassword(Model model, PasswordForm passwordForm, BindingResult errors)
+	public String updateCustomerPassword(HttpServletRequest request, Model model, PasswordForm passwordForm, BindingResult errors)
 	{
 		passwordValidator.validate(passwordForm, errors);
 
@@ -175,6 +175,11 @@ public class CustomerController
 			model.addAttribute("customerForm", passwordForm);
 			return "users/updatePassword";
 		}
-		return REDIRECT_PREFIX + "/account";
+
+		//注销用户
+		HttpSession session = request.getSession();
+		session.invalidate();
+
+		return REDIRECT_PREFIX + "/login";
 	}
 }
