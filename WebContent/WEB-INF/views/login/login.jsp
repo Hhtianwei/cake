@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		</c:if>
  	<c:url var="login" value="/login"/>
 	<form id="login-form" method="post" action="${login}">
-		userName:<input type="text" name="uname"/><br>
+		userName:<input type="text" name="uname" value="${uname }"/><br>
 		password:<input type="password" name="password"/><br>
 		<br>
 		remember-me:<input type="checkbox" name="remember-me"/>
