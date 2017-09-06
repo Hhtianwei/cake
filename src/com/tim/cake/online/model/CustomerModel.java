@@ -22,6 +22,7 @@ public class CustomerModel
 	public static final String NICKNAME = "nickName";
 	public static final String MOBILE = "mobile";
 	public static final String EMAIL = "email";
+	public static final String PASSWORD = "password";
 	public static final String CREATEDATE = "createDate";
 
 	private int id;

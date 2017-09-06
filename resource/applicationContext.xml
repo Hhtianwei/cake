@@ -23,12 +23,14 @@
     	<property name="customerService" ref="customerService"/>
     	<property name="customerConvert" ref="customerConvert"/>
     	<property name="customerReverseConvert" ref="customerReverseConvert"/>
+    	<property name="passwordService" ref="passwordService"/>
     </bean>
     
     <bean id="customerConvert" class="com.tim.cake.online.convert.CustomerConvert"></bean>
     
-    <bean id="customerReverseConvert" class="com.tim.cake.online.convert.CustomerReverseConvert"></bean>
+    <bean id="customerReverseConvert" class="com.tim.cake.online.convert.CustomerReverseConvert">
+    	<property name="passwordService" ref="passwordService"/>
+    </bean>
     
-    
-    
+    <bean id="passwordService" class="com.tim.cake.online.service.impl.PasswordService"></bean>
 </beans>

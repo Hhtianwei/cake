@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>用户列表</title>
+	<title>注册结果</title>
 	<link href="<%=path%>/ui/css/main.css" rel="stylesheet">
 	<script type="text/javascript" src="<%=path%>/ui/javascript/jquery/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="<%=path%>/ui/javascript/register.js"></script>

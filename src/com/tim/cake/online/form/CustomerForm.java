@@ -2,13 +2,14 @@ package com.tim.cake.online.form;
 
 public class CustomerForm
 {
-
+	private int id;
 	private String name;
 	private String nickName;
 	private String mobile;
 	private String email;
 	private String password;
 	private String confirmPassword;
+	private boolean update;
 
 	public String getName()
 	{
@@ -69,5 +70,26 @@ public class CustomerForm
 	{
 		this.confirmPassword = confirmPassword;
 	}
+
+	public int getId()
+	{
+		return id;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+	public boolean isUpdate()
+	{
+		return update;
+	}
+
+	public void setUpdate(boolean update)
+	{
+		this.update = update;
+	}
+
 
 }

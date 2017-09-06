@@ -12,6 +12,7 @@ public class CustomerData
 	private String email;
 	private Date createDate;
 	private String password;
+	private boolean isUpdate;
 
 	public int getId()
 	{
@@ -83,5 +84,13 @@ public class CustomerData
 		this.password = password;
 	}
 
+	public boolean isUpdate()
+	{
+		return isUpdate;
+	}
 
+	public void setUpdate(boolean isUpdate)
+	{
+		this.isUpdate = isUpdate;
+	}
 }

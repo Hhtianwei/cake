@@ -11,20 +11,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>用户注册</title>
+	<title>用户信息更新 </title>
 	<link href="<%=path%>/ui/css/main.css" rel="stylesheet">
 	<script type="text/javascript" src="<%=path%>/ui/javascript/jquery/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="<%=path%>/ui/javascript/register.js"></script>
 </head>
 <body>
-	<h2>用户注册</h2>
+	<h2>用户资料修改</h2>
 	<br>
-	<c:url var="register" value="/register"/>
+	<c:url var="update" value="/updateCustomerInfo"/>
 	
-	<form:form action="${register }" method="post" commandName="customerForm">
+	<form:form action="${update }" method="post" commandName="customerForm">
 	
+		<form:hidden path="id"/>
+		
+		<form:hidden path="update"/>
+
 		<font color="red"><form:errors path="name"/></font><br>
-		用户名：<form:input path="name"/><br>
+		用户名：<form:input path="name" readonly="true"/><br>
 		
 		<font color="red"><form:errors path="nickName"/></font><br>
 		昵    称：<form:input path="nickName"/><br>
@@ -34,14 +37,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<font color="red"><form:errors path="email"/></font><br>
 		邮    箱：<form:input path="email"/><br>
-		
-		<font color="red"><form:errors path="password"/></font><br>
-		密    码：<form:password path="password"/><br>
-		
-		<font color="red"><form:errors path="confirmPassword"/></font><br>
-		再次输入密码：<form:password path="confirmPassword"/><br>		
-		 <input type="submit" value="register"/><br>
+		<br>
+		<input type="submit" value="更新"/>
 	</form:form>
-	
+	<hr>
+	<c:url var="account" value="/account"/>
+	<a href="${account }">返回个人信息中心</a>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.tim.cake.online.validator;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
@@ -30,14 +31,18 @@ public class CustomerValidator implements Validator
 		String email = form.getEmail();
 		String password = form.getPassword();
 		String confirmPassword = form.getConfirmPassword();
+		boolean isUpdate = form.isUpdate();
 
-		if (StringUtils.isBlank(name))
+		if (!isUpdate)
 		{
-			errors.rejectValue("name", "customer.name.invalid");
-		}
-		else if (StringUtils.length(name) > 50)
-		{
-			errors.rejectValue("name", "customer.name.length.invalid");
+			if (StringUtils.isBlank(name))
+			{
+				errors.rejectValue("name", "customer.name.invalid");
+			}
+			else if (StringUtils.length(name) > 50)
+			{
+				errors.rejectValue("name", "customer.name.length.invalid");
+			}
 		}
 
 		if (StringUtils.isBlank(nickName))
@@ -67,18 +72,22 @@ public class CustomerValidator implements Validator
 			errors.rejectValue("email", "customer.email.format.invalid");
 		}
 
-		if (StringUtils.isBlank(password))
+		if (!isUpdate)
 		{
-			errors.rejectValue("password", "customer.password.invalid");
+			if (StringUtils.isBlank(password))
+			{
+				errors.rejectValue("password", "customer.password.invalid");
+			}
+			else if (StringUtils.length(password) > 50)
+			{
+				errors.rejectValue("password", "customer.password.length.invalid");
+			}
+			else if (!StringUtils.equals(password, confirmPassword))
+			{
+				errors.rejectValue("confirmPassword", "customer.confirmpassword.invalid");
+			}
 		}
-		else if (StringUtils.length(password) > 50)
-		{
-			errors.rejectValue("password", "customer.password.length.invalid");
-		}
-		else if (!StringUtils.equals(password, confirmPassword))
-		{
-			errors.rejectValue("confirmPassword", "customer.confirmpassword.invalid");
-		}
+
 	}
 
 	/**
@@ -99,7 +108,9 @@ public class CustomerValidator implements Validator
 	 */
 	public static boolean isMobile(String mobile)
 	{
-		return Pattern.matches(REGEX_MOBILE, mobile);
+		Pattern regex = Pattern.compile("^1[34578]\\d{9}$");
+		Matcher matcher = regex.matcher(mobile);
+		return matcher.matches();
 	}
 
 	/**
@@ -113,4 +124,24 @@ public class CustomerValidator implements Validator
 		return Pattern.matches(REGEX_EMAIL, email);
 	}
 
+	public static boolean checkMobileNumber(String mobileNumber)
+	{
+		boolean flag = false;
+		try
+		{
+			Pattern regex = Pattern.compile("^1[34578]\\d{9}$");
+			Matcher matcher = regex.matcher(mobileNumber);
+			flag = matcher.matches();
+		}
+		catch (Exception e)
+		{
+			flag = false;
+		}
+		return flag;
+	}
+
+	public static void main(String[] args)
+	{
+		System.out.println(checkMobileNumber("15934076040"));
+	}
 }

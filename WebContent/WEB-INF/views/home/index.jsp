@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>cake home</title>
 </head>
 <body>
 	<c:set var="hasLogin" value="false"/>
@@ -23,13 +23,16 @@
 		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		    <input type="submit" value="Log out" />
 		</form>
+		&nbsp;
+		<c:url var="account" value="/account"/>
+		<a href="${account }">个人中心</a>
 	</c:if>
 	<c:if test="${!hasLogin }">
 		未登录
 		<br>
 		<c:url var="login" value="/login"/>
 		<c:url var="register" value="/register"/>
-		<a href="${login }">login</a>&nbsp;<a href="${register }">register</a>
+		<a href="${login }">登录</a>&nbsp;<a href="${register }">注册</a>
 	</c:if>
 	<br>
 	<hr>
