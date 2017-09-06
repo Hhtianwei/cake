@@ -4,24 +4,39 @@ import java.util.Date;
 
 import com.tim.cake.online.data.CustomerData;
 import com.tim.cake.online.model.CustomerModel;
-import com.tim.cake.online.utils.MD5Util;
+import com.tim.cake.online.service.impl.PasswordService;
 
 
 public class CustomerReverseConvert implements Convert<CustomerData, CustomerModel>
 {
 
+	private PasswordService passwordService;
+
 	@Override
 	public void convert(CustomerData source, CustomerModel target)
 	{
-		target.setId(source.getId());
-		target.setName(source.getName());
+		boolean isUpdate = source.isUpdate();
+		if (!isUpdate)
+		{
+			target.setName(source.getName());
+			target.setCreateDate(new Date());
+			String encodingPassword = passwordService.encodingPassword(target, source.getPassword());
+			target.setPassword(encodingPassword);
+			target.setEnabled(1);
+		}
+
 		target.setNickName(source.getNickName());
 		target.setMobile(source.getMobile());
 		target.setEmail(source.getEmail());
-		target.setCreateDate(new Date());
-		String salt = MD5Util.MD5(source.getName());
-		String encodingPassword = MD5Util.MD5(source.getPassword() + "{" + salt + "}");
-		target.setPassword(encodingPassword);
-		target.setEnabled(1);
+	}
+
+	public PasswordService getPasswordService()
+	{
+		return passwordService;
+	}
+
+	public void setPasswordService(PasswordService passwordService)
+	{
+		this.passwordService = passwordService;
 	}
 }

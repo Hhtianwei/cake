@@ -14,4 +14,6 @@ public interface CustomerDao
 	CustomerModel findCustomerByName(String name);
 
 	void save(CustomerModel model);
+
+	List checkPassword(int id, String oldPassword);
 }

@@ -1,5 +1,6 @@
 package com.tim.cake.online.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.tim.cake.online.common.dao.CommonDAO;
@@ -42,6 +43,16 @@ public class CustomerDaoImpl extends CommonDAO implements CustomerDao
 	public void addAuthorities(AuthoritiesModel model)
 	{
 		super.saveOrUpdateEntity(model);
+	}
+
+	@Override
+	public List checkPassword(int id, String oldPassword)
+	{
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put(CustomerModel.ID, id);
+		map.put(CustomerModel.PASSWORD, oldPassword);
+		List result = super.getEntitiesByFields(CustomerModel.class, map);
+		return result;
 	}
 
 }
