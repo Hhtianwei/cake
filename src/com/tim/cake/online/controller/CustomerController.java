@@ -68,6 +68,15 @@ public class CustomerController
 			model.addAttribute("customerForm", customerForm);
 			return "users/register";
 		}
+
+		String name = customerForm.getName();
+		if (!customerFacade.checkUserName(name))
+		{
+			bindingResult.rejectValue("name", "customer.name.already.exists");
+			LOG.error("register error,userName already exists.");
+			model.addAttribute("customerForm", customerForm);
+			return "users/register";
+		}
 		customerFacade.register(customerForm);
 		return "users/registerResult";
 	}

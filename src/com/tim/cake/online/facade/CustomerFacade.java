@@ -17,4 +17,6 @@ public interface CustomerFacade
 	void update(CustomerForm customerForm);
 
 	void updatePassword(PasswordForm passwordForm) throws UpdatePasswordException;
+
+	boolean checkUserName(String name);
 }

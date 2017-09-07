@@ -94,6 +94,13 @@ public class CustomerFacadeImpl implements CustomerFacade
 		customerService.update(model);
 	}
 
+	@Override
+	public boolean checkUserName(String name)
+	{
+		CustomerModel model = customerService.queryCustomerByName(name);
+		return model == null ? true : false;
+	}
+
 	public CustomerService getCustomerService()
 	{
 		return customerService;
@@ -133,5 +140,4 @@ public class CustomerFacadeImpl implements CustomerFacade
 	{
 		this.passwordService = passwordService;
 	}
-
 }
