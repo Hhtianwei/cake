@@ -1,6 +1,8 @@
 package com.tim.cake.online.common.service;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 import com.tim.cake.online.common.dao.CommonDAO;
 
@@ -27,6 +29,21 @@ public class CommonService
 	public <T> void deleteAll(Collection<T> entities)
 	{
 		commonDao.deleteAll(entities);
+	}
+
+	public <T> Object getEntityById(Class clazz, int id)
+	{
+		return commonDao.load(clazz, id);
+	}
+
+	public <T> List getAllEntites(Class clazz)
+	{
+		return commonDao.loadAllEntities(clazz);
+	}
+
+	public <T> List getAllEntitesByField(Class clazz, HashMap<String, Object> params)
+	{
+		return commonDao.getEntitiesByFields(clazz, params);
 	}
 
 	public CommonDAO getCommonDao()

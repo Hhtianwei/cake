@@ -2,10 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:task="http://www.springframework.org/schema/task"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-4.1.xsd">
 	
 	<import resource="connectionDB.xml"/>
 	 
@@ -32,5 +35,30 @@
     	<property name="passwordService" ref="passwordService"/>
     </bean>
     
-    <bean id="passwordService" class="com.tim.cake.online.service.impl.PasswordService"></bean>
+    <bean id="passwordService" class="com.tim.cake.online.service.impl.PasswordService"/>
+    
+    <bean id="productService" class="com.tim.cake.online.service.impl.ProductServiceImpl">
+    	<property name="commonService" ref="commonService"/>
+    	<property name="productDao" ref="productDao"></property>
+    </bean>
+    
+    <bean id="productDao" class="com.tim.cake.online.dao.impl.ProductDaoImpl" parent="commonDAO"></bean>
+     
+     <bean id="productConvert" class="com.tim.cake.online.convert.ProductConvert"></bean>
+     
+     <bean id="productFacade" class="com.tim.cake.online.facade.impl.ProductFacadeImpl">
+     	<property name="productService" ref="productService"/>
+     	<property name="productConvert" ref="productConvert"/>
+     </bean>
+    
+    
+    <!-- <bean id="loadImage" class="com.tim.cake.online.task.LoadImage"/>
+     -->
+    <!-- 定时任务 -->
+	<!-- <task:scheduler id="taskScheduler" pool-size="100" />
+    <task:scheduled-tasks scheduler="taskScheduler">
+       	每3秒触发任务 ，系统启动之后，就会开始触发，不用人工启动触发条件
+       	<task:scheduled ref="loadImage" method="loadImage" cron="0/3 * * * * ?"/>
+    </task:scheduled-tasks> -->
+    
 </beans>

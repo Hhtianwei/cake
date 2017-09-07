@@ -179,6 +179,25 @@ public class CommonDAO
 		return searchResult;
 	}
 
+	//pagination data
+	public <T> SearchResult<T> search(String sql, Pagination page, HashMap<String, Object> params, Class clazz)
+	{
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery(sql).addEntity(clazz);
+		if (params != null && !params.isEmpty())
+		{
+			query.setProperties(params);
+		}
+		List tempList = query.list();
+		page.setTotalResults(tempList.size());
+		query.setFirstResult((page.getCurrentPage() - 1) * page.getPageSize());
+		query.setMaxResults(page.getPageSize());
+		SearchResult<T> searchResult = new SearchResult<T>();
+		List<T> result = query.list();
+		searchResult.setPagination(page);
+		searchResult.setResults(result);
+		return searchResult;
+	}
 
 	//根据ID查询 单个 对象
 	public <T> Object load(Class clazz, int id)
