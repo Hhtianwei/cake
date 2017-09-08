@@ -49,7 +49,10 @@
      <bean id="productFacade" class="com.tim.cake.online.facade.impl.ProductFacadeImpl">
      	<property name="productService" ref="productService"/>
      	<property name="productConvert" ref="productConvert"/>
+     	<property name="productReverseConvert" ref="productReverseConvert"/>
      </bean>
+     
+     <bean id="productReverseConvert" class="com.tim.cake.online.convert.ProductReverseConvert"/>
     
     
     <!-- <bean id="loadImage" class="com.tim.cake.online.task.LoadImage"/>

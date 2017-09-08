@@ -41,6 +41,12 @@ public class ProductServiceImpl implements ProductService
 		return searchResult;
 	}
 
+	@Override
+	public void save(ProductModel productModel)
+	{
+		commonService.save(productModel);
+	}
+
 	public CommonService getCommonService()
 	{
 		return commonService;
@@ -60,4 +66,5 @@ public class ProductServiceImpl implements ProductService
 	{
 		this.productDao = productDao;
 	}
+
 }

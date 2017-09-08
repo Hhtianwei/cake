@@ -8,7 +8,9 @@ import com.tim.cake.online.common.page.SearchResult;
 import com.tim.cake.online.convert.Convert;
 import com.tim.cake.online.data.ProductData;
 import com.tim.cake.online.facade.ProductFacade;
+import com.tim.cake.online.form.ProductForm;
 import com.tim.cake.online.model.ProductModel;
+import com.tim.cake.online.model.SizeProductModel;
 import com.tim.cake.online.service.ProductService;
 
 
@@ -16,6 +18,8 @@ public class ProductFacadeImpl implements ProductFacade
 {
 	private ProductService productService;
 	private Convert<ProductModel, ProductData> productConvert;
+
+	private Convert<ProductData, ProductModel> productReverseConvert;
 
 	@Override
 	public ProductData getProductById(int id)
@@ -44,6 +48,38 @@ public class ProductFacadeImpl implements ProductFacade
 		return searchData;
 	}
 
+	@Override
+	public void save(ProductForm productForm)
+	{
+		ProductData data = new ProductData();
+		data.setLocation(productForm.getLocation());
+		data.setLongName(productForm.getLongName());
+		data.setName(productForm.getName());
+		data.setShape(productForm.getShape());
+
+		boolean flag = productForm.isFlag();
+		if (flag)
+		{
+			int pId = Integer.parseInt(productForm.getPid());
+			data.setPid(pId);
+			data.setPrice(Double.parseDouble(productForm.getPrice()));
+			data.setSize(productForm.getSize());
+			data.setStock(Integer.parseInt(productForm.getStock()));
+			data.setChild(true);
+		}
+		ProductModel productModel = null;
+		if (data.isChild())
+		{
+			productModel = new SizeProductModel();
+		}
+		else
+		{
+			productModel = new ProductModel();
+		}
+		productReverseConvert.convert(data, productModel);
+		productService.save(productModel);
+	}
+
 	public ProductService getProductService()
 	{
 		return productService;
@@ -64,4 +100,13 @@ public class ProductFacadeImpl implements ProductFacade
 		this.productConvert = productConvert;
 	}
 
+	public Convert<ProductData, ProductModel> getProductReverseConvert()
+	{
+		return productReverseConvert;
+	}
+
+	public void setProductReverseConvert(Convert<ProductData, ProductModel> productReverseConvert)
+	{
+		this.productReverseConvert = productReverseConvert;
+	}
 }
