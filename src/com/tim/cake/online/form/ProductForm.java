@@ -1,27 +1,18 @@
-package com.tim.cake.online.data;
+package com.tim.cake.online.form;
 
-public class ProductData
+public class ProductForm
 {
-	private int id;
 	private String name;//简称
 	private String longName;//全称
-	private double price;//价格
 	private String location;//产地
 	private String shape;//形状
+
+	private String price;//价格
 	private String size;
-	private int pid;
-	private int stock;
-	private boolean child;
+	private String pid;
+	private String stock;
 
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+	private boolean flag;
 
 	public String getName()
 	{
@@ -43,15 +34,6 @@ public class ProductData
 		this.longName = longName;
 	}
 
-	public double getPrice()
-	{
-		return price;
-	}
-
-	public void setPrice(double price)
-	{
-		this.price = price;
-	}
 
 	public String getLocation()
 	{
@@ -83,33 +65,46 @@ public class ProductData
 		this.size = size;
 	}
 
-	public int getPid()
+	public String getPrice()
+	{
+		return price;
+	}
+
+	public void setPrice(String price)
+	{
+		this.price = price;
+	}
+
+	public String getPid()
 	{
 		return pid;
 	}
 
-	public void setPid(int pid)
+	public void setPid(String pid)
 	{
 		this.pid = pid;
 	}
 
-	public int getStock()
+	public String getStock()
 	{
 		return stock;
 	}
 
-	public void setStock(int stock)
+	public void setStock(String stock)
 	{
 		this.stock = stock;
 	}
 
-	public boolean isChild()
+	public boolean isFlag()
 	{
-		return child;
+		return flag;
 	}
 
-	public void setChild(boolean child)
+	public void setFlag(boolean flag)
 	{
-		this.child = child;
+		this.flag = flag;
 	}
+
+
+
 }

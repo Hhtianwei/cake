@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>cake home</title>
+<title>cake 后台管理</title>
 </head>
 <body>
 	<c:set var="hasLogin" value="false"/>
@@ -23,9 +23,6 @@
 		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		    <input type="submit" value="Log out" />
 		</form>
-		&nbsp;
-		<c:url var="account" value="/account"/>
-		<a href="${account }">个人中心</a>
 	</c:if>
 	<c:if test="${!hasLogin }">
 		未登录
@@ -36,14 +33,14 @@
 	</c:if>
 	<br>
 	<hr>
-	<h1>展示商品信息</h1>
-	<hr>
-	<c:set var="pagination" value="${searchResults.pagination }"/>
-	<c:set var="results" value="${searchResults.results }"/>
-	<c:forEach var="product" items="${results }">
-		---${product.id },${product.name },${product.price }-----<br/>
-	</c:forEach>
-	...
+	<h1>功能列表</h1>
+	
+	<c:url var="productManage" value="/admin/productManage"/>
+	<c:url var="customerManage" value="/admin/customerManage"/>
+	<ul>
+		<li><a href="${productManage }">产品信息管理</a></li>
+		<li><a href="${customerManage }">用户管理</a></li>
+	</ul>
 	<hr>
 </body>
 </html>

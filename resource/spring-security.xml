@@ -20,7 +20,9 @@
 		<intercept-url pattern="/register" access="permitAll"/>
 		
 		<intercept-url pattern="/testHello2" access="hasRole('ROLE_USER')"/>
-		<intercept-url pattern="/testHello3" access="hasRole('ROLE_ADMIN')"/>
+		
+		<!-- 后台管理中心 只能admin用户进入 -->
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 		
 		<!-- hasRole('ROLE_USER') 只能放一个属性    hasAnyRole()可以放多个值  -->
 		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>

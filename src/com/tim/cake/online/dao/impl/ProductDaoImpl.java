@@ -17,12 +17,31 @@ public class ProductDaoImpl extends CommonDAO implements ProductDao
 	public SearchResult<ProductModel> listProducts(Pagination page, ProductData data)
 	{
 		StringBuilder sql = new StringBuilder();
+		HashMap<String, Object> params = new HashMap<String, Object>();
 		sql.append("SELECT * FROM PRODUCT");
 		sql.append(" where 1=1");
-		sql.append(" and  pid=:pid ");
 
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("pid", 0);
+		if (data != null)
+		{
+			if (data.getPid() == 0)
+			{
+				sql.append(" and  pid=:pid ");
+				params.put("pid", 0);
+			}
+
+			if (data.getId() != 0)
+			{
+				sql.append(" and id=:id ");
+				params.put("id", data.getId());
+			}
+
+			if (data.getName() != null && !"".equals(data.getName()))
+			{
+				sql.append(" and name=:id ");
+				params.put("name", data.getName());
+			}
+		}
+
 		SearchResult<ProductModel> results = super.search(sql.toString(), page, params, ProductModel.class);
 		return results;
 	}

@@ -25,8 +25,6 @@ public class LoginPageController
 	public String login(Model model, HttpServletRequest request,
 			@RequestParam(value = "error", defaultValue = "false") boolean loginError)
 	{
-		String uname = request.getParameter("uname");
-		LOG.info("=====================" + uname + "======================");
 		if (loginError)
 		{
 			AuthenticationException loginException = (AuthenticationException) request.getSession()
@@ -47,7 +45,6 @@ public class LoginPageController
 				errorMsg = "user attack system,can't login";
 				LOG.error(String.format("user[%s] attack system,can't login"));
 			}
-			model.addAttribute("uname", uname);
 			model.addAttribute("errorMsg", errorMsg);
 		}
 		return "login/login";

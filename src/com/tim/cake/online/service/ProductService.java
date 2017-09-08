@@ -16,4 +16,6 @@ public interface ProductService
 	List<SizeProductModel> getSizeProducts(int pId);
 
 	SearchResult<ProductModel> getSuperProducts(Pagination page, ProductData data);
+
+	void save(ProductModel productModel);
 }
