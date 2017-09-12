@@ -15,6 +15,7 @@ public class ProductReverseConvert implements Convert<ProductData, ProductModel>
 		target.setLongName(source.getLongName());
 		target.setName(source.getName());
 		target.setShape(source.getShape());
+		target.setImageName(source.getImageUrl());
 		if (source.isChild())
 		{
 			((SizeProductModel) target).setPid(source.getPid());

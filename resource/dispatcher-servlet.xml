@@ -58,4 +58,11 @@
 		<property name="useCodeAsDefaultMessage" value="true" />
 	</bean>
 	
+		<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" /><!-- 默认编码 (ISO-8859-1) -->
+		<property name="maxInMemorySize" value="10240" /><!-- 最大内存大小 (1024000) -->
+		<property name="maxUploadSize" value="-1" /><!-- 最大文件大小，-1为无限止(-1) -->
+	</bean>
+	
  </beans>

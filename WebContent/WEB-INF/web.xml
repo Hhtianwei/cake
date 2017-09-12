@@ -70,9 +70,9 @@
   	<location>/WEB-INF/views/error/errorNotFoundPage.jsp</location>
   </error-page>
   
-  <error-page>
-    <error-code>403</error-code>
-    <location>/WEB-INF/views/error/accessDenied.jsp</location>
+	<error-page>
+	    <error-code>403</error-code>
+	    <location>/WEB-INF/views/error/accessDenied.jsp</location>
 	</error-page>
 	
   <error-page>

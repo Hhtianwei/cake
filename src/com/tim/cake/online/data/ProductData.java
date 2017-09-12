@@ -1,5 +1,8 @@
 package com.tim.cake.online.data;
 
+import java.util.List;
+
+
 public class ProductData
 {
 	private int id;
@@ -12,6 +15,11 @@ public class ProductData
 	private int pid;
 	private int stock;
 	private boolean child;
+	private String imageUrl;
+
+	private boolean defaultProduct;
+
+	List<ProductData> subProductDatas;
 
 	public int getId()
 	{
@@ -111,5 +119,35 @@ public class ProductData
 	public void setChild(boolean child)
 	{
 		this.child = child;
+	}
+
+	public String getImageUrl()
+	{
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl)
+	{
+		this.imageUrl = imageUrl;
+	}
+
+	public List<ProductData> getSubProductDatas()
+	{
+		return subProductDatas;
+	}
+
+	public void setSubProductDatas(List<ProductData> subProductDatas)
+	{
+		this.subProductDatas = subProductDatas;
+	}
+
+	public boolean isDefaultProduct()
+	{
+		return defaultProduct;
+	}
+
+	public void setDefaultProduct(boolean defaultProduct)
+	{
+		this.defaultProduct = defaultProduct;
 	}
 }

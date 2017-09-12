@@ -23,7 +23,7 @@ public class HomePageController
 	private ProductFacade productFacade;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String findUser(Model model)
+	public String home(Model model)
 	{
 		LOG.info("visit home page...");
 

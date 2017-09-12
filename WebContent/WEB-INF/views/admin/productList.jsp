@@ -31,6 +31,8 @@
 		<a href="${login }">登录</a>&nbsp;<a href="${register }">注册</a>
 	</c:if>
 	<br>
+	<c:url var="homePage" value="/"/>
+	&nbsp; &nbsp; <a href="${homePage }">home page</a>
 	<hr>
 	<h1>列表</h1>
 	<hr>
@@ -38,13 +40,14 @@
 		<c:url var="addProduct" value="/admin/addProduct"/>
 		<c:url var="updateProduct" value="/admin/updateProduct"/>
 		<c:url var="deleteProduct" value="/admin/deleteProduct"/>
-		<c:url var="productManage" value="/admin/productManage"/>
+		<c:url var="productManage" value="/product/productManage"/>
+		
 		
 		<c:set var="pagination" value="${searchResults.pagination }"/>
 		<c:set var="currentPage" value="${pagination.currentPage }"/>
 		<c:set var="results" value="${searchResults.results }"/>
 		
-		<a href="${addProduct }">新增产品</a>
+		<a href="${addProduct }">新增产品</a>   
 		<br/>
 		<table border="1">
 			<thead>
@@ -72,7 +75,10 @@
 						<td>${product.price }</td>
 						<td>${product.size }</td>
 						<td>${product.stock }</td>
-						<td>图片</td>
+						<td>
+							<c:url var="img" value="${product.imageUrl }"/>
+							<img src="${img }">
+						</td>
 						<td><a href="${updateProduct }?id=${product.id }">修改</a></td>
 						<td><a href="${deleteProduct }?id=${product.id }">删除</a></td>
 					</tr>
