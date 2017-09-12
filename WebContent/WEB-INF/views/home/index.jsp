@@ -38,12 +38,32 @@
 	<hr>
 	<h1>展示商品信息</h1>
 	<hr>
-	<c:set var="pagination" value="${searchResults.pagination }"/>
 	<c:set var="results" value="${searchResults.results }"/>
 	<c:forEach var="product" items="${results }">
-		---${product.id },${product.name },${product.price }-----<br/>
+		<c:url var="productImg" value="${product.imageUrl}"/>
+		<c:url var="productDetail" value="product/productDetail/${product.id }"/>
+		<ul>
+			<li>
+				<a href="${productDetail }"><img src="${productImg }"/></a>
+			</li>
+			<li>
+				<a href="${productDetail }">${product.name }</a>
+			</li>
+		</ul>
 	</c:forEach>
-	...
 	<hr>
+	
+	<c:set var="pagination" value="${searchResults.pagination }"/>
+	<c:set var="currentPage" value="${pagination.currentPage }"/>
+	
+	<c:url var="productList" value="/product/productList"/>
+	
+	<c:if test="${currentPage-1 > 0 }">
+			<a href="${productList }?currentPage=${currentPage-1 }">上一页</a>
+		</c:if>
+		<span>${currentPage }</span>
+		<c:if test="${currentPage < pagination.totalPages }">
+			<a href="${productList }?currentPage=${currentPage+1 }">下一页</a>
+		</c:if>
 </body>
 </html>
