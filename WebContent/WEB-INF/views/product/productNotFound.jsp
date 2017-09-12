@@ -15,7 +15,7 @@
 	<c:if test="${not empty sessionScope.customerData }">
 		<c:set var="hasLogin" value="true"/>
 	</c:if>
-	这个是首页，
+	这个是产品信息，
 	<c:if test="${hasLogin }">
 		当前登录用户是<font color="red">&nbsp;${sessionScope.customerData.nickName }</font>
 		<c:url var="logoutUrl" value="/logout"/>
@@ -38,32 +38,50 @@
 	<hr>
 	<h1>展示商品信息</h1>
 	<hr>
-	<c:set var="results" value="${searchResults.results }"/>
-	<c:forEach var="product" items="${results }">
-		<c:url var="productImg" value="${product.imageUrl}"/>
-		<c:url var="productDetail" value="product/productDetail/${product.id }"/>
-		<ul>
-			<li>
-				<a href="${productDetail }"><img src="${productImg }"/></a>
-			</li>
-			<li>
-				<a href="${productDetail }">${product.name }</a>
-			</li>
-		</ul>
-	</c:forEach>
-	<hr>
-	
-	<c:set var="pagination" value="${searchResults.pagination }"/>
-	<c:set var="currentPage" value="${pagination.currentPage }"/>
-	
-	<c:url var="productList" value="/product/productList"/>
-	
-	<c:if test="${currentPage-1 > 0 }">
-			<a href="${productList }?currentPage=${currentPage-1 }">上一页</a>
-		</c:if>
-		<span>${currentPage }</span>
-		<c:if test="${currentPage < pagination.totalPages }">
-			<a href="${productList }?currentPage=${currentPage+1 }">下一页</a>
-		</c:if>
+	<table border="1" align="center">
+		<tbody>
+			
+			<tr>
+				<td></td>
+				<td>${product.imageUrl }</td>
+			</tr>
+			<tr>
+				<td>产品名称</td>
+				<td>${product.name }</td>
+			</tr>
+			<tr>
+				<td>产品描述</td>
+				<td>${product.longName }</td>
+			</tr>
+			<tr>
+				<td>源产地</td>
+				<td>${product.location }</td>
+			</tr>
+			<tr>
+				<td>形状</td>
+				<td>${product.shape }</td>
+			</tr>
+			
+			<tr>
+				<td>形状</td>
+				<td>${product.shape }</td>
+			</tr>
+			
+			<tr>
+				<td>尺寸</td>
+				<td>${product.size }</td>
+			</tr>
+			
+			<tr>
+				<td>价格</td>
+				<td>${product.price }</td>
+			</tr>
+			
+			<tr>
+				<td>库存</td>
+				<td>${product.stock }</td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>

@@ -61,10 +61,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<input type="radio" name="addType" value="sub"/>子级产品
 	<hr>
 	
-	<c:url var="addProduct" value="/admin/addProduct"/>
+	<c:url var="addProduct" value="/admin/addProduct?${_csrf.parameterName}=${_csrf.token}"/>
 	<c:url var="queryAllParent" value="/admin/queryAllParent"/>
 	
-	<form:form action="${addProduct }" method="post" commandName="productForm">
+	<form:form action="${addProduct }" method="post" commandName="productForm" enctype="multipart/form-data">
 	
 		<form:hidden path="flag" id="flag"/>
 		
@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			形状:<form:input path="shape"/><br>
 			
 			<font color="red"><form:errors path="shape"/></font><br>
-				上传图片:<input type="file" name="productImg"/>
+				上传图片:<input type="file" name="files"/>
 			<br>
 		</div>
 		
@@ -94,12 +94,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			尺寸:<form:input path="size"/><br>		
 			
 			<font color="red"><form:errors path="pid"/></font><br>
-			父级产品:<form:input path="pid" readonly="readonly"/><a href="javascript:void(0)" id="showProducts">查询</a><br>
+			父级产品:<input name="pName" readonly="readonly"/><a href="javascript:void(0)" id="showProducts">查询</a><br>
+			<form:hidden path="pid" id="pid" readonly="readonly"/>
 			
 			<font color="red"><form:errors path="stock"/></font><br>
 			库存:<form:input path="stock"/><br>
 		</div>
-		
 		<input type="submit" value="增加"/><br>
 	</form:form>
 	<hr>
@@ -120,6 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 				</tbody>
 			</table>
+			<div id="paginationDiv"></div>
 			<a id="closeDiv">关闭</a>
 		<br>
 	</div>

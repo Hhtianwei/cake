@@ -22,7 +22,15 @@ public class ProductServiceImpl implements ProductService
 	@Override
 	public ProductModel getProductById(int id)
 	{
-		return (ProductModel) commonService.getEntityById(ProductModel.class, id);
+		ProductModel model = (ProductModel) commonService.getEntityById(ProductModel.class, id);
+
+		if (model instanceof ProductModel)
+		{
+			List<SizeProductModel> products = getSizeProducts(model.getId());
+			model.setProducts(products);
+		}
+
+		return model;
 	}
 
 	@Override

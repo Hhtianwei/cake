@@ -25,7 +25,9 @@
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 		
 		<!-- hasRole('ROLE_USER') 只能放一个属性    hasAnyRole()可以放多个值  -->
-		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+		<!-- <intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/> -->
+		
+		<intercept-url pattern="/**" access="permitAll"/>
 		
 		<form-login login-page="/login"  username-parameter="uname" password-parameter="password"
 		authentication-success-handler-ref="loginSuccessHandler"

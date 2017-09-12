@@ -29,37 +29,6 @@ public class ProductValidator implements Validator
 		String location = form.getLocation();
 		boolean flag = form.isFlag();
 
-		if (StringUtils.isBlank(name))
-		{
-			errors.rejectValue("name", "product.name.invalid");
-		}
-		else if (StringUtils.length(name) > 50)
-		{
-			errors.rejectValue("name", "product.name.length.invalid");
-		}
-
-		if (StringUtils.isBlank(longName))
-		{
-			errors.rejectValue("longName", "product.longName.invalid");
-		}
-		else if (StringUtils.length(name) > 200)
-		{
-			errors.rejectValue("longName", "product.longName.length.invalid");
-		}
-
-		if (StringUtils.isBlank(shape))
-		{
-			errors.rejectValue("shape", "product.shape.invalid");
-		}
-		else if (StringUtils.length(name) > 20)
-		{
-			errors.rejectValue("shape", "product.shape.length.invalid");
-		}
-
-		if (StringUtils.length(location) > 20)
-		{
-			errors.rejectValue("location", "product.location.length.invalid");
-		}
 
 		if (flag)
 		{
@@ -113,6 +82,40 @@ public class ProductValidator implements Validator
 				{
 					errors.rejectValue("price", "product.price.format2.invalid");
 				}
+			}
+		}
+		else
+		{
+			if (StringUtils.isBlank(name))
+			{
+				errors.rejectValue("name", "product.name.invalid");
+			}
+			else if (StringUtils.length(name) > 50)
+			{
+				errors.rejectValue("name", "product.name.length.invalid");
+			}
+
+			if (StringUtils.isBlank(longName))
+			{
+				errors.rejectValue("longName", "product.longName.invalid");
+			}
+			else if (StringUtils.length(name) > 200)
+			{
+				errors.rejectValue("longName", "product.longName.length.invalid");
+			}
+
+			if (StringUtils.isBlank(shape))
+			{
+				errors.rejectValue("shape", "product.shape.invalid");
+			}
+			else if (StringUtils.length(name) > 20)
+			{
+				errors.rejectValue("shape", "product.shape.length.invalid");
+			}
+
+			if (StringUtils.length(location) > 20)
+			{
+				errors.rejectValue("location", "product.location.length.invalid");
 			}
 		}
 
