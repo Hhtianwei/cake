@@ -31,10 +31,22 @@ public class CommonDAO
 		session.saveOrUpdate(entry);
 	}
 
+	public <T> void refresh(T entry)
+	{
+		Session session = this.getSessionFactory().getCurrentSession();
+		session.refresh(entry);
+	}
+
 	public <T> void update(T entry)
 	{
 		Session session = this.getSessionFactory().getCurrentSession();
 		session.update(entry);
+	}
+
+	public <T> void merge(T entry)
+	{
+		Session session = this.getSessionFactory().getCurrentSession();
+		session.merge(entry);
 	}
 
 	public <T> void delete(T entry)

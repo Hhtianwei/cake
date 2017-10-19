@@ -93,4 +93,5 @@ public class CustomerData
 	{
 		this.isUpdate = isUpdate;
 	}
+
 }

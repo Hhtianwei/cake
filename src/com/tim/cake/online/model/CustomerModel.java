@@ -3,13 +3,16 @@ package com.tim.cake.online.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 
 @Entity
@@ -33,6 +36,7 @@ public class CustomerModel
 	private String password;
 	private Date createDate;
 	private int enabled;
+	private CartModel cart;
 
 	private Set<AuthoritiesModel> authorities;
 
@@ -135,6 +139,17 @@ public class CustomerModel
 	public void setEnabled(int enabled)
 	{
 		this.enabled = enabled;
+	}
+
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+	public CartModel getCart()
+	{
+		return cart;
+	}
+
+	public void setCart(CartModel cart)
+	{
+		this.cart = cart;
 	}
 
 }

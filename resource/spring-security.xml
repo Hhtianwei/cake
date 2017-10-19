@@ -18,7 +18,6 @@
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/login*" access="permitAll"/>
 		<intercept-url pattern="/register" access="permitAll"/>
-		
 		<intercept-url pattern="/testHello2" access="hasRole('ROLE_USER')"/>
 		
 		<!-- 后台管理中心 只能admin用户进入 -->
@@ -77,6 +76,7 @@
 	<b:bean id="loginSuccessHandler" class="com.tim.cake.online.security.handler.MyAuthenticationSuccessHandler">
 		<b:property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
 		<b:property name="customerFacade" ref="customerFacade"/>
+		<b:property name="cartService" ref="cartService"></b:property>
 	</b:bean>
 	
 	<b:bean id="loginFailureHandler" class="com.tim.cake.online.security.handler.MyAuthenticationFailureHandler">

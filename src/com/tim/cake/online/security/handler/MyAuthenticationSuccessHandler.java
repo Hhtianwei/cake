@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import com.tim.cake.online.data.CustomerData;
 import com.tim.cake.online.facade.CustomerFacade;
 import com.tim.cake.online.security.service.DefaultBruteForceAttackCounter;
+import com.tim.cake.online.service.CartService;
 
 
 public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler
@@ -22,6 +23,8 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 	private DefaultBruteForceAttackCounter bruteForceAttackCounter;
 
 	private CustomerFacade customerFacade;
+
+	private CartService cartService;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -34,7 +37,20 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 		//save userInfo to session 
 		request.getSession().setAttribute("customerData", customerData);
 
+		//merge session cart to userCart
+		cartService.merge();
+
 		super.onAuthenticationSuccess(request, response, authentication);
+	}
+
+	public CartService getCartService()
+	{
+		return cartService;
+	}
+
+	public void setCartService(CartService cartService)
+	{
+		this.cartService = cartService;
 	}
 
 	public DefaultBruteForceAttackCounter getBruteForceAttackCounter()

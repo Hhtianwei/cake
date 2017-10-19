@@ -1,5 +1,7 @@
 package com.tim.cake.online.convert;
 
+import java.util.Date;
+
 import com.tim.cake.online.data.ProductData;
 import com.tim.cake.online.model.ProductModel;
 import com.tim.cake.online.model.SizeProductModel;
@@ -16,6 +18,7 @@ public class ProductReverseConvert implements Convert<ProductData, ProductModel>
 		target.setName(source.getName());
 		target.setShape(source.getShape());
 		target.setImageName(source.getImageUrl());
+		target.setCreateTime(new Date());
 		if (source.isChild())
 		{
 			((SizeProductModel) target).setPid(source.getPid());

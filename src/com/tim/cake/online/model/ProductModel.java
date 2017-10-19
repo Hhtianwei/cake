@@ -1,5 +1,6 @@
 package com.tim.cake.online.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -33,6 +34,8 @@ public class ProductModel
 	private boolean defaultProduct;
 
 	private List<SizeProductModel> products;
+
+	private Date createTime = new Date();
 
 	@Id
 	@Column(name = "id", length = 11, unique = true)
@@ -121,5 +124,16 @@ public class ProductModel
 	public void setProducts(List<SizeProductModel> products)
 	{
 		this.products = products;
+	}
+
+	@Column(name = "createTime", unique = false, nullable = false)
+	public Date getCreateTime()
+	{
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime)
+	{
+		this.createTime = createTime;
 	}
 }

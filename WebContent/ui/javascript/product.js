@@ -121,6 +121,21 @@ $(function(){
 		});
 	});
 	
+	
+	//加入购物车
+	$("#addToCart2").on("click",function(){
+		var $sizeProducts = $("span.sizePro");
+		var productId = "";
+		$sizeProducts.each(function(){
+			if($(this).hasClass("currentSize")){
+				productId = $(this).attr("productId");
+				return;
+			}
+		});
+		
+		var url = "";
+	});
+	
 });
 
 function getBodyData(results){
