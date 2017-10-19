@@ -39,4 +39,10 @@ public class MediaController
 		response.getOutputStream().write(b);
 		inputStream.close();
 	}
+
+	public static void main(String[] args)
+	{
+		System.out.println(Base64.encodeBase64String("4.jpg".getBytes()));
+		System.out.println(new String(Base64.decodeBase64(Base64.encodeBase64String("1.jpg".getBytes()))));
+	}
 }

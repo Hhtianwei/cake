@@ -31,7 +31,8 @@
     	<property name="passwordService" ref="passwordService"/>
     </bean>
     
-    <bean id="customerConvert" class="com.tim.cake.online.convert.CustomerConvert"></bean>
+    <bean id="customerConvert" class="com.tim.cake.online.convert.CustomerConvert">
+    </bean>
     
     <bean id="customerReverseConvert" class="com.tim.cake.online.convert.CustomerReverseConvert">
     	<property name="passwordService" ref="passwordService"/>
@@ -56,6 +57,24 @@
      
      <bean id="productReverseConvert" class="com.tim.cake.online.convert.ProductReverseConvert"/>
     
+    <bean id="sessionService" class="com.tim.cake.online.common.service.SessionService"/>
+    
+    <bean id="cartService" class="com.tim.cake.online.service.impl.CartServiceImpl">
+    	<property name="sessionService" ref="sessionService"/>
+    	<property name="commonService" ref="commonService"/>
+    	<property name="customerService" ref="customerService"></property>
+    </bean>
+    
+    <bean id="cartFacade" class="com.tim.cake.online.facade.impl.CartFacadeImpl">
+    	<property name="cartService" ref="cartService"/>
+    	<property name="cartConvert" ref="cartConvert"/>
+    	<property name="productService" ref="productService"/>
+    </bean>
+    
+    <bean id="cartConvert" class="com.tim.cake.online.convert.CartConvert">
+    	<property name="customerConvert" ref="customerConvert"></property>
+    	<property name="productConvert" ref="productConvert"></property>
+    </bean>
     
     <!-- <bean id="loadImage" class="com.tim.cake.online.task.LoadImage"/>
      -->

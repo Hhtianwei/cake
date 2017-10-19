@@ -14,8 +14,8 @@ public class CustomerDaoImpl extends CommonDAO implements CustomerDao
 	@Override
 	public CustomerModel findCustomerById(int id)
 	{
-		//return (CustomerModel) super.get(CustomerModel.class, id);
-		return (CustomerModel) super.load(CustomerModel.class, id);
+		return (CustomerModel) super.get(CustomerModel.class, id);
+		//return (CustomerModel) super.load(CustomerModel.class, id);
 	}
 
 	@Override

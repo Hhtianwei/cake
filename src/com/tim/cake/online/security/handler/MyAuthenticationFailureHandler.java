@@ -19,7 +19,6 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 
 	private DefaultBruteForceAttackCounter bruteForceAttackCounter;
 
-
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authenticationException) throws IOException, ServletException

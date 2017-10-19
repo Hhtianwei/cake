@@ -1,6 +1,5 @@
 package com.tim.cake.online.convert;
 
-import com.tim.cake.online.convert.Convert;
 import com.tim.cake.online.data.CustomerData;
 import com.tim.cake.online.model.CustomerModel;
 

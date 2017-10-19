@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>cake 后台管理</title>
+<title>cake cart</title>
 </head>
 <body>
 	<c:set var="hasLogin" value="false"/>
@@ -33,14 +33,20 @@
 	</c:if>
 	<br>
 	<hr>
-	<h1>功能列表</h1>
 	
-	<c:url var="productManage" value="/product/productManage"/>
-	<c:url var="customerManage" value="/admin/customerManage"/>
-	<ul>
-		<li><a href="${productManage }">产品信息管理</a></li>
-		<li><a href="${customerManage }">用户管理</a></li>
-	</ul>
-	<hr>
+	<h1>产品列表2</h1>
+		
+	====${cartData }====	
+	<c:set var="entries" value="${cartData.entries }"/>
+	-----${entries }-----
+	<c:forEach var="entry" items="${entries}">
+		--${entry.product.id }--${entry.product.name }--${entry.quantity }---${entry.totalPrice }--------------
+		<c:url var="productImg" value="${entry.product.imageUrl }"/>
+		<img alt="" src="${productImg}"/>
+		<hr>
+		<br>
+	</c:forEach>
+	
+	
 </body>
 </html>

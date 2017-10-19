@@ -16,6 +16,16 @@ public class CommonService
 		commonDao.saveOrUpdateEntity(entry);
 	}
 
+	public <T> void refresh(T entry)
+	{
+		commonDao.refresh(entry);
+	}
+
+	public <T> void merge(T entry)
+	{
+		commonDao.merge(entry);
+	}
+
 	public <T> void saveAll(Collection<T> entities)
 	{
 		commonDao.saveOrUpdateAllEntity(entities);
@@ -33,7 +43,7 @@ public class CommonService
 
 	public <T> Object getEntityById(Class clazz, int id)
 	{
-		return commonDao.load(clazz, id);
+		return commonDao.get(clazz, id);
 	}
 
 	public <T> List getAllEntites(Class clazz)

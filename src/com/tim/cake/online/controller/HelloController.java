@@ -29,6 +29,12 @@ public class HelloController
 		return "hello world";
 	}
 
+	@RequestMapping("/hello2")
+	public void sayHello2()
+	{
+		System.out.println("sayHello 2 ...");
+	}
+
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
 	@ResponseBody
 	public String findUser(Model model, @RequestParam(value = "id", required = false) int id)

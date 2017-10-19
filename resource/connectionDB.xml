@@ -14,7 +14,7 @@
 
 	<alias name="myDataSource" alias="securityDataSource"/>
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+		destroy-method="close" lazy-init="false">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/cake?useUnicode=true&amp;characterEncoding=utf-8" />
 		<property name="username" value="root" />
@@ -33,7 +33,7 @@
 		<property name="dataSource" ref="myDataSource"></property>
 	</bean>
 	
-	<bean id="mySessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	<bean id="mySessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" lazy-init="false">
         <property name="dataSource" ref="myDataSource"/>
         <property name="packagesToScan">
         	<list>
@@ -62,13 +62,14 @@
 			<tx:method name="register" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="merge" propagation="REQUIRED" />
 			<tx:method name="*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
 	
 	<aop:config expose-proxy="true">
 		<aop:pointcut id="txPointcut"
-			expression="execution(* com.tim.cake.online.*.*.*(..))" />
+			expression="execution(* com.tim.cake.online.service.*.*(..))" />
 		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
 	</aop:config>
 

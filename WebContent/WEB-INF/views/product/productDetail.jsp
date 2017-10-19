@@ -59,6 +59,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br>
 	<hr>
 	<h1>展示商品信息</h1>
+
+	<c:set var="productId" value=""/>
 	<hr>
 	<table border="1" align="center">
 		<tbody>
@@ -91,6 +93,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>尺寸</td>
 				<td>
 					<c:forEach var="subProduct" items="${product.subProductDatas }" varStatus="status">
+						<c:if test="${status.index == 0 }">
+							<c:set var="productId" value="${subProduct.id}"/>
+						</c:if>
 						<span productId="${subProduct.id }" class="sizePro ${(status.index == 0)?'currentSize':''}">${subProduct.size }</span>
 					</c:forEach>
 				</td>
@@ -116,7 +121,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table>
 	
 	<hr>
-	
-	
+	<c:url var="addToCart" value="/cart/addToCart"/>
+	<a href="${addToCart }?productId=${productId}"  id="addToCart">加入购物车</a>
+	<br>
+	<br>
+	<br>
 </body>
 </html>

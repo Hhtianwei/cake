@@ -75,7 +75,7 @@ public class AdminController
 
 		ProductData data = createProductData(productForm, request);
 		productFacade.save(data);
-		return REDIRECT_PREFIX + "/admin/productManage";
+		return REDIRECT_PREFIX + "/product/productManage";
 	}
 
 	private ProductData createProductData(ProductForm productForm, MultipartHttpServletRequest request)
