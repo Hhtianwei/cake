@@ -27,6 +27,7 @@ public class CustomerModel
 	public static final String EMAIL = "email";
 	public static final String PASSWORD = "password";
 	public static final String CREATEDATE = "createDate";
+	public static final String ADDRESS = "address";
 
 	private int id;
 	private String name;
@@ -37,6 +38,7 @@ public class CustomerModel
 	private Date createDate;
 	private int enabled;
 	private CartModel cart;
+	private AddressModel address;
 
 	private Set<AuthoritiesModel> authorities;
 
@@ -150,6 +152,17 @@ public class CustomerModel
 	public void setCart(CartModel cart)
 	{
 		this.cart = cart;
+	}
+
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+	public AddressModel getAddress()
+	{
+		return address;
+	}
+
+	public void setAddress(AddressModel address)
+	{
+		this.address = address;
 	}
 
 }

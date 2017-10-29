@@ -31,6 +31,23 @@ public class CartConvert implements Convert<CartModel, CartData>
 		setCustomerData(source, target);
 
 		setEntires(source, target);
+
+		setTotalPrice(source, target);
+	}
+
+	private void setTotalPrice(CartModel source, CartData target)
+	{
+		List<EntryModel> list = source.getEntries();
+		if (CollectionUtils.isEmpty(list))
+		{
+			return;
+		}
+		double total = 0d;
+		for (EntryModel entry : list)
+		{
+			total += entry.getTotalPrice();
+		}
+		target.setTotalPrice(total);
 	}
 
 	private void setEntires(CartModel source, CartData target)

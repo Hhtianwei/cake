@@ -76,6 +76,34 @@
     	<property name="productConvert" ref="productConvert"></property>
     </bean>
     
+    <bean id="accountService" class="com.tim.cake.online.service.impl.AccountServiceImpl">
+    	<property name="commonService" ref="commonService"/>
+    	<property name="customerService" ref="customerService"></property>
+    </bean>
+    
+    <bean id="accountFacade" class="com.tim.cake.online.facade.impl.AccountFacadeImpl">
+    	<property name="accountService" ref="accountService"/>
+    	<property name="locationConvert" ref="locationConvert"/>
+    	<property name="addresReverseConvert" ref="addresReverseConvert"/>
+    	<property name="addresConvert" ref="addresConvert"/>
+    </bean>
+    
+    <bean id="locationConvert" class="com.tim.cake.online.convert.LocationConvert">
+    </bean>
+    
+    <bean id="addresReverseConvert" class="com.tim.cake.online.convert.AddresReverseConvert">
+    	<property name="customerService" ref="customerService"/>
+    	<property name="accountService" ref="accountService"/>
+    </bean>
+    
+    <bean id="addresConvert" class="com.tim.cake.online.convert.AddresConvert">
+    	<property name="customerConvert" ref="customerConvert"/>
+    	<property name="accountService" ref="accountService"/>
+    	<property name="locationConvert" ref="locationConvert"/>
+    </bean>
+    
+    
+    
     <!-- <bean id="loadImage" class="com.tim.cake.online.task.LoadImage"/>
      -->
     <!-- 定时任务 -->

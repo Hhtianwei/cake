@@ -132,41 +132,55 @@ public class CartServiceImpl implements CartService
 		List<EntryModel> sessionEntries = sessionCart.getEntries();
 		if (CollectionUtils.isEmpty(entries))
 		{
-			cartModel.setEntries(sessionEntries);
+			if (CollectionUtils.isEmpty(sessionEntries))
+			{
+				cartModel.setEntries(new ArrayList<EntryModel>());
+			}
+			else
+			{
+				cartModel.setEntries(sessionEntries);
+			}
 		}
 		else
 		{
 			List<EntryModel> tempEntries = new ArrayList<EntryModel>();
-			for (EntryModel sessionEntry : sessionEntries)
+			if (CollectionUtils.isNotEmpty(sessionEntries))
 			{
-				ProductModel sessionPro = sessionEntry.getProduct();
-				if (sessionPro == null)
+				for (EntryModel sessionEntry : sessionEntries)
 				{
-					continue;
-				}
-				for (EntryModel customerEntry : entries)
-				{
-					ProductModel customerPro = customerEntry.getProduct();
-					if (customerPro == null)
+					ProductModel sessionPro = sessionEntry.getProduct();
+					if (sessionPro == null)
 					{
 						continue;
 					}
-					if (customerPro.getId() == sessionPro.getId())
+					for (EntryModel customerEntry : entries)
 					{
-						int quantity = sessionEntry.getQuantity();
-						int customerQuantity = customerEntry.getQuantity();
-						customerEntry.setQuantity(quantity + customerQuantity);
-						customerEntry.setTotalPrice(customerEntry.getTotalPrice() + sessionEntry.getTotalPrice());
-						commonService.merge(customerEntry);
-						break;
+						ProductModel customerPro = customerEntry.getProduct();
+						if (customerPro == null)
+						{
+							continue;
+						}
+						if (customerPro.getId() == sessionPro.getId())
+						{
+							int quantity = sessionEntry.getQuantity();
+							int customerQuantity = customerEntry.getQuantity();
+							customerEntry.setQuantity(quantity + customerQuantity);
+							customerEntry.setTotalPrice(customerEntry.getTotalPrice() + sessionEntry.getTotalPrice());
+							commonService.merge(customerEntry);
+							break;
+						}
 					}
-				}
 
-				//如果没有找到对应 的产品，则会进入这里
-				tempEntries.add(sessionEntry);
+					//如果没有找到对应 的产品，则会进入这里
+					tempEntries.add(sessionEntry);
+				}
 			}
-			entries.addAll(tempEntries);
-			cartModel.setEntries(entries);
+
+			if (tempEntries.size() > 0)
+			{
+				entries.addAll(tempEntries);
+				cartModel.setEntries(entries);
+			}
 		}
 
 		commonService.merge(cartModel);

@@ -20,6 +20,8 @@
 		<intercept-url pattern="/register" access="permitAll"/>
 		<intercept-url pattern="/testHello2" access="hasRole('ROLE_USER')"/>
 		
+		<intercept-url pattern="/my-account/**" access="hasRole('ROLE_USER')"/>
+		
 		<!-- 后台管理中心 只能admin用户进入 -->
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
 		
