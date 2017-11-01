@@ -32,6 +32,8 @@
 	<div>用户个人信息</div>
 	<hr>
 	<div class="addressInfo">
+		
+		<c:url var="editAddress" value="/my-account/editAddress"/>
 		<c:url var="addAddress" value="/my-account/addAddress"/>
 		<a href="${addAddress }">新增地址</a>
 		<div class="addressTitle">
@@ -50,15 +52,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>住宅</td>
-						<td>田伟</td>
-						<td>18202997620</td>
-						<td>山西省太原市 省政府办公厅2楼左边厕所第6格</td>
-						<td>更新</td>
-						<td>删除</td>
-					</tr>
 					<c:forEach items="${addresses }" var="address" varStatus="status">
 						<tr>
 							<td>${status.index+1 }</td>
@@ -67,8 +60,13 @@
 							<td>${address.tel }</td>
 							
 							<td>${address.provinceName}${address.cityName}${address.areaName}${address.street}</td>
-							<td>更新</td>
-							<td>删除</td>
+							<td style="white-space: nowrap;">
+								<a href="${editAddress}?id=${address.id}">更新</a>
+							</td>
+							<td>
+								<c:url var="delAddress" value="/my-account/delAddress/${address.id }"/>
+								<a href="${delAddress}">删除</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

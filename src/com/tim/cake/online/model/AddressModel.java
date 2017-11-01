@@ -5,11 +5,12 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -26,6 +27,7 @@ public class AddressModel
 	public static final String RECIPIENT = "recipient";//收件人
 	public static final String TEL = "tel";
 	public static final String CUSTOMER = "customer";
+	public static final String CREATETIME = "createTime";
 
 	private int id;
 	private String tagName;
@@ -124,7 +126,9 @@ public class AddressModel
 		this.tel = tel;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade =
+	{ CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "customerId")
 	public CustomerModel getCustomer()
 	{

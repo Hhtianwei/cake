@@ -20,5 +20,9 @@ public interface AccountService
 
 	public List<AddressModel> getAddressList();
 
+	public AddressModel getAddressById(int id);
+
+	public void deleteAddress(AddressModel model);
+
 
 }

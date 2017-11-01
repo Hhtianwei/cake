@@ -33,9 +33,11 @@ public class AccountFacadeImpl implements AccountFacade
 	}
 
 	@Override
-	public void updateAddress(AddressData addressData)
+	public void editAddress(AddressData addressData)
 	{
-
+		AddressModel model = accountService.getAddressById(addressData.getId());
+		addresReverseConvert.convert(addressData, model);
+		accountService.saveAddress(model);
 	}
 
 	@Override
@@ -73,6 +75,27 @@ public class AccountFacadeImpl implements AccountFacade
 			datas.add(data);
 		}
 		return datas;
+	}
+
+	@Override
+	public AddressData getAddressById(int id)
+	{
+		AddressModel model = accountService.getAddressById(id);
+		AddressData data = new AddressData();
+		addresConvert.convert(model, data);
+		return data;
+	}
+
+
+	@Override
+	public void delAddress(int id)
+	{
+		AddressModel model = accountService.getAddressById(id);
+		if (model == null)
+		{
+			return;
+		}
+		accountService.deleteAddress(model);
 	}
 
 	public AccountService getAccountService()
