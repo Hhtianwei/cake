@@ -26,6 +26,11 @@ public class CommonService
 		commonDao.merge(entry);
 	}
 
+	public <T> void update(T entry)
+	{
+		commonDao.update(entry);
+	}
+
 	public <T> void saveAll(Collection<T> entities)
 	{
 		commonDao.saveOrUpdateAllEntity(entities);
@@ -54,6 +59,11 @@ public class CommonService
 	public <T> List getAllEntitesByField(Class clazz, HashMap<String, Object> params)
 	{
 		return commonDao.getEntitiesByFields(clazz, params);
+	}
+
+	public <T> List getAllEntitesByField(Class clazz, HashMap<String, Object> params, HashMap<String, String> orders)
+	{
+		return commonDao.getEntitiesByFields(clazz, params, orders);
 	}
 
 	public CommonDAO getCommonDao()

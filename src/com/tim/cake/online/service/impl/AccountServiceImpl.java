@@ -21,13 +21,14 @@ public class AccountServiceImpl implements AccountService
 	public void saveAddress(AddressModel model)
 	{
 		commonService.save(model);
-		commonService.refresh(model);
+		//commonService.refresh(model);
 	}
 
 	@Override
 	public void updateAddress(AddressModel model)
 	{
-
+		commonService.save(model);
+		commonService.refresh(model);
 	}
 
 	@Override
@@ -75,8 +76,32 @@ public class AccountServiceImpl implements AccountService
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		CustomerModel customer = customerService.getCurrentCustomer();
 		params.put(AddressModel.CUSTOMER, customer);
-		List<AddressModel> list = commonService.getAllEntitesByField(AddressModel.class, params);
+		HashMap<String, String> orders = new HashMap<String, String>();
+		orders.put("DESC", AddressModel.CREATETIME);
+		List<AddressModel> list = commonService.getAllEntitesByField(AddressModel.class, params, orders);
 		return list;
+	}
+
+	@Override
+	public AddressModel getAddressById(int id)
+	{
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		CustomerModel customer = customerService.getCurrentCustomer();
+		params.put(AddressModel.CUSTOMER, customer);
+		params.put(AddressModel.ID, id);
+		List<AddressModel> list = commonService.getAllEntitesByField(AddressModel.class, params);
+
+		if (list == null || list.size() == 0)
+		{
+			return null;
+		}
+		return list.get(0);
+	}
+
+	@Override
+	public void deleteAddress(AddressModel model)
+	{
+		commonService.delete(model);
 	}
 
 	public CommonService getCommonService()

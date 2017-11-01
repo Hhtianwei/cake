@@ -61,7 +61,7 @@ public class CartModel
 	}
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "customerId", unique = true)
+	@JoinColumn(name = "customerId")
 	public CustomerModel getCustomer()
 	{
 		return customer;

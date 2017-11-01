@@ -38,7 +38,7 @@ public class CustomerModel
 	private Date createDate;
 	private int enabled;
 	private CartModel cart;
-	private AddressModel address;
+	private Set<AddressModel> address;
 
 	private Set<AuthoritiesModel> authorities;
 
@@ -143,7 +143,8 @@ public class CustomerModel
 		this.enabled = enabled;
 	}
 
-	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "customer", cascade =
+	{ CascadeType.MERGE, CascadeType.REMOVE })
 	public CartModel getCart()
 	{
 		return cart;
@@ -154,15 +155,14 @@ public class CustomerModel
 		this.cart = cart;
 	}
 
-	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
-	public AddressModel getAddress()
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	public Set<AddressModel> getAddress()
 	{
 		return address;
 	}
 
-	public void setAddress(AddressModel address)
+	public void setAddress(Set<AddressModel> address)
 	{
 		this.address = address;
 	}
-
 }

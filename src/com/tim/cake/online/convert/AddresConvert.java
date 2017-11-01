@@ -37,14 +37,14 @@ public class AddresConvert implements Convert<AddressModel, AddressData>
 		target.setProvinceCode(source.getProvienceCode());
 		target.setProvinceName(provinceData.getName());
 
-		LocationModel cityModel = accountService.getLocationInfoByCode(source.getProvienceCode());
+		LocationModel cityModel = accountService.getLocationInfoByCode(source.getCityCode());
 		LocationData cityData = new LocationData();
 		locationConvert.convert(cityModel, cityData);
 
 		target.setCityCode(source.getCityCode());
 		target.setCityName(cityData.getName());
 
-		LocationModel areaModel = accountService.getLocationInfoByCode(source.getProvienceCode());
+		LocationModel areaModel = accountService.getLocationInfoByCode(source.getAreaCode());
 		LocationData areaData = new LocationData();
 		locationConvert.convert(areaModel, areaData);
 		target.setAreaCode(source.getAreaCode());

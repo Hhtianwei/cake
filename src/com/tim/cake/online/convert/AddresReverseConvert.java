@@ -19,8 +19,11 @@ public class AddresReverseConvert implements Convert<AddressData, AddressModel>
 		target.setAreaCode(source.getAreaCode());
 		target.setCityCode(source.getCityCode());
 
-		CustomerModel customer = customerService.getCurrentCustomer();
-		target.setCustomer(customer);
+		if (target.getId() == 0)
+		{
+			CustomerModel customer = customerService.getCurrentCustomer();
+			target.setCustomer(customer);
+		}
 
 		//修改默认地址
 		if (source.getIsDefault())

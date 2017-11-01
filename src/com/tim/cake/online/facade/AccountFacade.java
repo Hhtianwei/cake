@@ -10,13 +10,17 @@ public interface AccountFacade
 {
 	public void saveAddress(AddressData addressData);
 
-	public void updateAddress(AddressData addressData);
-
 	public List<LocationData> getLocationInfoBySuperCode(String superCode);
 
 	public LocationData getLocationInfoByCode(String code);
 
 	List<AddressData> getAddressList();
+
+	AddressData getAddressById(int id);
+
+	void editAddress(AddressData addressData);
+
+	public void delAddress(int id);
 
 
 }

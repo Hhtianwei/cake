@@ -2,13 +2,14 @@ var loactionUrl = "/cakeOnline/my-account/getLocationInfo";
 
 $(function(){
 	var $province = $("#province");
+	var $provinceForEdit = $("#provinceForEdit");
 	var $city = $("#city");
 	var $area = $("#area");
 	
-	
 	getLocationInfo(1,$province);
 	
-	$province.on("change",function(){
+	$(document).on('change', '#province,#provinceForEdit', function (){
+	//$provinceForEdit,$province.on("change",function(){
 		initLocation($city);
 		initLocation($area);
 		var code = $(this).val();
